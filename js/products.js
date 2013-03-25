@@ -1,55 +1,56 @@
 $(document).ready(function() {
 	$('#check_box').change(function() {
-		var $td = $("#admin-table tr td:last-child");
+		var $td = $('#admin-table tr td:last-child');
 		if (this.checked == true) {
-			$td.css("visibility", "visible");
-			$("#admin-table tr:last-child").css("visibility", "visible");
-			$("#edit-box").css("display", "block");
+			$td.css('visibility', 'visible');
+			$('#admin-table tr:last-child').css('visibility', 'visible');
+			$('#edit-box').css('display', 'block');
 		} else {
-			$td.css("visibility", "hidden");
-			$("#admin-table tr:last-child").css("visibility", "hidden");
-			$("#edit-box").css("display", "none");
+			$td.css('visibility', 'hidden');
+			$('#admin-table tr:last-child').css('visibility', 'hidden');
+			$('#edit-box').css('display', 'none');
 		}
 		return false;
 	});
 
 	$(document).on('click', '#admin-table tr td:not(.last)', function() {
-		var $td = $("#admin-table tr td:last-child");
+		var $td = $('#admin-table tr td:last-child');
 		var tr = $(this).parent().get(0);
-		if (tr.rowIndex == 0 || (tr.rowIndex == $("#edit table tr").length - 1) || $td.css("display") == "none") {
+		if (tr.rowIndex == 0 || (tr.rowIndex == $('#edit table tr').length - 1) || $td.css('display') == 'none') {
 			return;
 		}
-		$("#edit-box form legend").text('Редактирование');
-		$("#edit-box #in_change").removeProp('disabled');
-		$("#edit-box #in_add").removeProp("checked");
-		$("#edit-box #in_change").prop('checked', 'checked');
-		$("#edit-box #in_id").css('display', 'block');
-		var $input = $("#edit-box input#id");
+		var $editBox = $('#edit-box');
+		$editBox.find('form legend').text('Редактирование');
+		$editBox.find('#in_change').removeProp('disabled');
+		$editBox.find('#in_add').removeProp('checked');
+		$editBox.find('#in_change').prop('checked', 'checked');
+		$editBox.find('#in_id').css('display', 'block');
+		var $input = $editBox.find('input#id');
 		$input.val(tr.cells[0].innerHTML);
-		$("#edit-box input#marking").val(tr.cells[1].innerHTML);
-		$("#edit-box input#name").val(tr.cells[2].innerHTML);
-		$("#edit-box select").prop('selectedIndex', tr.cells[3].abbr);
-		$("#edit-box input#amount").val(tr.cells[4].innerHTML);
-		$("#edit-box button").prop('value', 'change');
-		$("#edit-box button").text('Редактировать');
+		$editBox.find('input#marking').val(tr.cells[1].innerHTML);
+		$editBox.find('input#name').val(tr.cells[2].innerHTML);
+		$editBox.find('select').prop('selectedIndex', tr.cells[3].abbr);
+		$editBox.find('input#amount').val(tr.cells[4].innerHTML);
+		$editBox.find('button').prop('value', 'change');
+		$editBox.find('button').text('Редактировать');
 	});
 
-	$("#edit-box #in_add").change(function() {
-		$("#edit-box form legend").text('Добавление');
-		$("#edit-box #in_id").css('display', 'none');
-		$("#edit-box button").prop('value', 'add');
-		$("#edit-box button").text('Добавить');
+	$('#edit-box #in_add').change(function() {
+		var $editBox = $('#edit-box');
+		$editBox.find('form legend').text('Добавление');
+		$editBox.find('#in_id').css('display', 'none');
+		$editBox.find('button').prop('value', 'add').text('Добавить');
 	});
 
-	$("#edit-box #in_change").change(function() {
-		$("#edit-box form legend").text('Редактирование');
-		$("#edit-box #in_id").css('display', 'block');
-		$("#edit-box button").prop('value', 'change');
-		$("#edit-box button").text('Редактировать');
+	$('#edit-box #in_change').change(function() {
+		var $editBox = $('#edit-box');
+		$editBox.find('form legend').text('Редактирование');
+		$editBox.find('#in_id').css('display', 'block');
+		$editBox.find('button').prop('value', 'change').text('Редактировать');
 	});
 
 	$(document).on('submit', 'form.edit-form', function() {
-		var c = $("#edit form input:checked");
+		var c = $('#edit form input:checked');
 		var del = []
 		$.each(c, function (i, v) {
 			del.push(v.value);
@@ -81,7 +82,7 @@ $(document).ready(function() {
 							alert(data.message);
 						}
 					},
-					"json"
+					'json'
 				);
 		return false;
 	});
