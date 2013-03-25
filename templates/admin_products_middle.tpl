@@ -1,5 +1,3 @@
-{* Smarty *}
-Hello {$name|default:'Katty'}, welcome to Smarty!
 <div id="edit">
 	<h2>Список товаров</h2>
 	<div>
