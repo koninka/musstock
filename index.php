@@ -6,9 +6,6 @@
 
 	$smarty = new Smarty_Musshop();
 
-	$smarty->force_compile = true;
-	// $smarty->testInstall();
-
 	$req = explode('/', substr($_SERVER['REQUEST_URI'], 1));
 	switch ($req[0])
 	{

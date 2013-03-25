@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>{$title|default:'Musstock - the Best!'}</title>
-	{include file='meta.tpl'}
-</head>
+	{include file='head.tpl'}
 <body>
 	<div id="wrapper">
 		<div id="wrapper_in">
@@ -22,6 +19,7 @@
 				{foreach from=$container|default:array() item=item}
 					{include file="$item"}
 				{/foreach}
+				</div>
 			</div>
 		</div>
 	</div>
