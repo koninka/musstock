@@ -13,5 +13,5 @@
    $data = $st->fetchAll(PDO::FETCH_ASSOC);
    $smarty->assign('table_rows', $data);
 
-   $products_table = $smarty->fetch('admin_table.tpl');
+   $admin_table = $smarty->fetch('admin_edit_table.tpl');
 ?>

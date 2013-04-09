@@ -5,7 +5,7 @@
 			<input type="checkbox" value="1000" id="check_box"/>
 		</label>
 		<div id="tbl">
-			{$editTable}
+			{$products_table}
 		</div>
 	</div>
 </div>
@@ -17,19 +17,18 @@
 			<label for="id">№:</label>
 				<input type="text" name="id" id="id" disabled>
 		</div>
-
-		{foreach from=$selectArr item=item name=field}
-			<label for="{$item}">{$tblTitles[$smarty.foreach.field.iteration]}</label>
-			{if isset($categories[$item])}
-				<select name="{$item}" id="{$item}">
-					<option disabled>Выберите категорию</option>
-					{html_options options=$categories[$item]}
-				</select>
-			{else}
-				<input type="text" name="{$item}" id="{$item}">
-			{/if}
-		{/foreach}
-		<button type="submit" name="submit" value="add">Добавить</button>
+		<label for="marking">Артикул:</label>
+			<input type="text" name="marking" id="marking">
+		<label for="name">Название товара:</label>
+			<input type="text" name="name" id="name">
+		<label for="category_id">Категория:</label>
+			<select name="category_id" id="category_id">
+				<option disabled>Выберите категорию</option>
+				{html_options options=$categories}
+			</select>
+		<label for="amount">Количество:</label>
+			<input type="text" name="amount" id="amount">
+				<button type="submit" name="submit" value="add">Добавить</button>
 	</fieldset>
 	</form>
    <input type="radio" id="in_add" name="sumbit_type" value="add" checked><label for="in_add">Добавление</label>

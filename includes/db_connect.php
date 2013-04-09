@@ -5,4 +5,11 @@
 							 $settings->db->password
 							);
 	$db_link->exec("SET CHARACTER SET utf8");
+
+   function bindParams(&$h, $cols, $vals)
+   {
+      foreach ($cols as $k => $v) {
+         $h->bindValue(":$v", $vals[$v]);
+      }
+   }
 ?>

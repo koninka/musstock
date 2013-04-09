@@ -26,7 +26,7 @@
 		var $host = "localhost";
 		var $user = "admin";
 		var $password = "admin107";
-		var $database = "musshop";
+		var $database = "musstock";
 		var $encode = "utf8";
 	}
 
