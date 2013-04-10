@@ -1,6 +1,6 @@
 <?php
    error_reporting(E_ALL);
-
+   echo 32;
    require_once('includes/settings.php');
    require_once('includes/db_connect.php');
    require_once('includes/entity.php');

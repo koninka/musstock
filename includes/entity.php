@@ -9,7 +9,7 @@
    $myGoods = new Goods();
    $myCategory = new Category();
    $myUser = new User();
-
+   print_r($myUser->fieldsHash);
    class Entity
    {
       public
@@ -258,6 +258,12 @@
                                  'name'    => 'id',
                                  'caption' => '№',
                                  'type'    => 'int',
+                                 'refKey'  => false
+                                 ),
+                           array(
+                                 'name'    => 'name',
+                                 'caption' => 'Имя',
+                                 'type'    => 'Varchar',
                                  'refKey'  => false
                                  ),
                            array(
