@@ -33,17 +33,17 @@ CREATE TABLE goods (
 );
 
 CREATE TABLE orders (
-		id INT NOT NULL AUTO_INCREMENT,
-		user_id INT NOT NULL,
-		order_date TIMESTAMP,
+		id 			INT NOT NULL AUTO_INCREMENT,
+		user_id 		INT NOT NULL,
+		order_date 	TIMESTAMP,
 		PRIMARY KEY(id),
 		FOREIGN KEY(user_id) REFERENCES user(id)
 );
 
 CREATE TABLE order_goods (
-		id INT NOT NULL AUTO_INCREMENT,
+		id 		INT NOT NULL AUTO_INCREMENT,
 		order_id INT NOT NULL,
-		good_id INT NOT NULL,
+		good_id 	INT NOT NULL,
 		PRIMARY KEY(id),
 		FOREIGN KEY(order_id) REFERENCES orders(id),
 		FOREIGN KEY(good_id) REFERENCES goods(id)

@@ -21,7 +21,7 @@
 		{foreach from=$selectArr item=item name=field}
 			<label for="{$item}">{$tblTitles[$smarty.foreach.field.iteration]}</label>
 			{if isset($categories[$item])}
-				<select name="{$item}" id="{$item}">
+				<select name="{$item}" id="{$item}" style="display: block; margin-bottom: 3px">
 					<option disabled>Выберите категорию</option>
 					{html_options options=$categories[$item]}
 				</select>

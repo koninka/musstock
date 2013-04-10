@@ -9,7 +9,9 @@
    $myGoods = new Goods();
    $myCategory = new Category();
    $myUser = new User();
-   print_r($myUser->fieldsHash);
+   $myOrders = new Orders();
+   $myOrderGoods = new Order_Goods();
+   // print_r($myUser->fieldsHash);
    class Entity
    {
       public
@@ -78,7 +80,7 @@
          $query     = 'SELECT ';
          $joins     = array();
          $alias     = array();
-         $cur_alias = substr($tblName, 0, 1).substr($tblName, strlen($tblName) - 1, strlen($tblName));
+         $cur_alias = substr($tblName, 0, 1).substr($tblName, strlen($tblName) - 2, strlen($tblName));
          foreach ($selectArgs as $key => $value) {
             if ($useRef && $this->fieldsHash[$value]['refKey']) {
                $refTbl = $this->fieldsHash[$value]['refTbl'];
@@ -96,7 +98,7 @@
          }
          $query .= implode(', ', $selectArgs)." FROM $this->tblName $cur_alias ".implode(' ', $joins);
          global $db_link;
-            $st = $db_link->query($query);
+         $st = $db_link->query($query);
          return $st->fetchAll($selectType);
       }
 
@@ -285,10 +287,10 @@
                                  'refKey'  => false
                                  ),
                            array(
-                                 'name'     => 'verification',
-                                 'caption'  => 'Подтверждение регистрации',
-                                 'type'     => 'varchar',
-                                 'refKey'   => false
+                                 'name'    => 'verification',
+                                 'caption' => 'Подтверждение регистрации',
+                                 'type'    => 'varchar',
+                                 'refKey'  => false
                                  ),
                            array(
                                  'name'    => 'salt',
@@ -322,6 +324,104 @@
       }
 
    }
+
+   class Orders extends Entity
+   {
+      public
+         $fieldsHash = array(),
+         $fieldsArr  = array(
+                           array(
+                                 'name'    => 'id',
+                                 'caption' => '№ заказа',
+                                 'type'    => 'int',
+                                 'refKey'  => false
+                                 ),
+                           array(
+                                 'name'     => 'user_id',
+                                 'caption'  => 'Имя пользователя',
+                                 'type'     => 'varchar',
+                                 'refKey'   => true,
+                                 'refTbl'   => 'user',
+                                 'refField' => 'id',
+                                 'refName'  => 'name'
+                                 ),
+                           array(
+                                 'name'    => 'order_date',
+                                 'caption' => 'Дата заказа',
+                                 'type'    => 'timestamp',
+                                 'refKey'  => false
+                                 ),
+                            );
+
+      function __construct()
+      {
+         $this->tblName = 'orders';
+         parent::__construct();
+      }
+
+      public function makeEditTable($isShowTable = false)
+      {
+         global $smarty;
+         if ($isShowTable) {
+            parent::makeEditTable($isShowTable);
+            $smarty->assign('caption', 'Добро пожаловать на страничку заказов, котятки');
+         } else {
+            return parent::makeEditTable();
+         }
+      }
+
+   }
+
+   class Order_goods extends Entity
+   {
+      public
+         $fieldsHash = array(),
+         $fieldsArr  = array(
+                           array(
+                                 'name'    => 'id',
+                                 'caption' => '№',
+                                 'type'    => 'int',
+                                 'refKey'  => false
+                                 ),
+                           array(
+                                 'name'     => 'order_id',
+                                 'caption'  => '№ заказа',
+                                 'type'     => 'int',
+                                 'refKey'   => true,
+                                 'refTbl'   => 'orders',
+                                 'refField' => 'id',
+                                 'refName'  => 'id'
+                                 ),
+                           array(
+                                 'name'     => 'good_id',
+                                 'caption'  => 'Заказанные товары',
+                                 'type'     => 'int',
+                                 'refKey'   => true,
+                                 'refTbl'   => 'goods',
+                                 'refField' => 'id',
+                                 'refName'  => 'name'
+                                 ),
+                            );
+
+      function __construct()
+      {
+         $this->tblName = 'order_goods';
+         parent::__construct();
+      }
+
+      public function makeEditTable($isShowTable = false)
+      {
+         global $smarty;
+         if ($isShowTable) {
+            parent::makeEditTable($isShowTable);
+            $smarty->assign('caption', 'Добро пожаловать на страничку заказов, котятки');
+         } else {
+            return parent::makeEditTable();
+         }
+      }
+
+      }
+
 
 
 
