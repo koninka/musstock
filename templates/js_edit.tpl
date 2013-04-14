@@ -88,6 +88,7 @@
                 jQuery('#tbl').html(data.table);
                 jQuery('#admin-table tr td:last-child').css('visibility', 'visible');
                 jQuery('#admin-table tr:last-child').css('visibility', 'visible');
+                alert('Успешно!');
               } else {
                 alert(data.message);
               }
