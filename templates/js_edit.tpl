@@ -27,11 +27,14 @@
       jQueryeditBox.find('#in_change').prop('checked', 'checked');
       jQueryeditBox.find('#in_id').css('display', 'block');
       var jQueryinput = jQueryeditBox.find('input#id');
-      jQueryinput.val(tr.cells[0].innerHTML);
+      var tr_id = $(this).parent().attr('id');
+      var id = (tr_id.substring(tr_id.indexOf('_') + 1));
+      jQueryinput.val(id);
       {foreach from=$selectArr item=item name=field}
-        {assign var='idx' value=$smarty.foreach.field.iteration}
+        {assign var='idx' value=$smarty.foreach.field.index}
         {if isset($categories[$item])}
-          jQueryeditBox.find("select#{$item}").prop('selectedIndex', tr.cells[{$idx}].abbr);
+          jQueryeditBox.find("select#{$item} option[value='"+tr.cells[{$idx}].abbr+"']")
+                       .prop("selected", "selected");
         {else}
           jQueryeditBox.find('input#{$item}').val(tr.cells[{$idx}].innerHTML);
         {/if}

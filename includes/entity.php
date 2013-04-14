@@ -115,15 +115,26 @@
             if ($value['refKey']) {
                array_push($refFields, 0);
                $c = new $value['refTbl']();
-               $data = $c->select(array($value['refField'], $value['refName']), false, PDO::FETCH_ASSOC);
+               $data = $c->select(array('id', $value['refField'], $value['refName']), false, PDO::FETCH_ASSOC);
+               // print_r($data);
+               // echo "<br><br>";
                $categories[$value['name']] = array();
                foreach ($data as $k => $v) {
-                  $categories[$value['name']][$v['id']] = $v[$value['refName']];
+                  $categories[$value['name']][$v[$value['refField']]] = $v[$value['refName']];
                }
             }
             // array_push($titlesArr, $value['name']);
             array_push($titlesArr, $value['caption']);
          }
+         // echo 'selects<br>';
+         // print_r($selectArr);
+         // echo "<br><br>";
+         // echo 'refs<br>';
+         // print_r($refFields);
+         // echo "<br><br>";
+         // echo 'cats<br>';
+         // print_r($categories);
+         // echo "<br><br>";
          $data = $this->select($selectArr, true);
          $smarty->assign('tableRows', $data);
          $smarty->assign('tblTitles', $titlesArr);
@@ -163,34 +174,34 @@
                   'type'    => 'int',
                   'refKey'  => false
                   ),
-                           array(
-                                 'name'    => 'marking',
-                                 'caption' => 'Артикул',
-                                 'type'    => 'varchar',
-                                 'refKey'  => false
-                                 ),
-                           array(
-                                 'name'    => 'name',
-                                 'caption' => 'Название',
-                                 'type'    => 'varchar',
-                                 'refKey'  => false
-                                 ),
-                           array(
-                                 'name'     => 'category_id',
-                                 'caption'  => 'Категория',
-                                 'type'     => 'varchar',
-                                 'refKey'   => true,
-                                 'refTbl'   => 'category',
-                                 'refField' => 'id',
-                                 'refName'  => 'name'
-                                 ),
-                           array(
-                                 'name'    => 'amount',
-                                 'caption' => 'Количество',
-                                 'type'    => 'varchar',
-                                 'refKey'  => false
-                                 ),
-                            );
+            array(
+                  'name'    => 'marking',
+                  'caption' => 'Артикул',
+                  'type'    => 'varchar',
+                  'refKey'  => false
+                  ),
+            array(
+                  'name'    => 'name',
+                  'caption' => 'Название',
+                  'type'    => 'varchar',
+                  'refKey'  => false
+                  ),
+            array(
+                  'name'     => 'category_id',
+                  'caption'  => 'Категория',
+                  'type'     => 'varchar',
+                  'refKey'   => true,
+                  'refTbl'   => 'category',
+                  'refField' => 'id',
+                  'refName'  => 'name'
+                  ),
+            array(
+                  'name'    => 'amount',
+                  'caption' => 'Количество',
+                  'type'    => 'varchar',
+                  'refKey'  => false
+                  ),
+             );
 
       function __construct()
       {
@@ -216,19 +227,19 @@
       public
          $fieldsHash = array(),
          $fieldsArr  = array(
-                           array(
-                                 'name'    => 'id',
-                                 'caption' => '№',
-                                 'type'    => 'int',
-                                 'refKey'  => false
-                                 ),
-                           array(
-                                 'name'    => 'name',
-                                 'caption' => 'Категория',
-                                 'type'    => 'varchar',
-                                 'refKey'  => false
-                                 ),
-                            );
+            array(
+                  'name'    => 'id',
+                  'caption' => '№',
+                  'type'    => 'int',
+                  'refKey'  => false
+                  ),
+            array(
+                  'name'    => 'name',
+                  'caption' => 'Категория',
+                  'type'    => 'varchar',
+                  'refKey'  => false
+                  ),
+             );
 
       function __construct()
       {
@@ -256,55 +267,55 @@
       public
          $fieldsHash = array(),
          $fieldsArr  = array(
-                           array(
-                                 'name'    => 'id',
-                                 'caption' => '№',
-                                 'type'    => 'int',
-                                 'refKey'  => false
-                                 ),
-                           array(
-                                 'name'    => 'name',
-                                 'caption' => 'Имя',
-                                 'type'    => 'Varchar',
-                                 'refKey'  => false
-                                 ),
-                           array(
-                                 'name'    => 'email',
-                                 'caption' => 'Email',
-                                 'type'    => 'varchar',
-                                 'refKey'  => false
-                                 ),
-                           array(
-                                 'name'    => 'login',
-                                 'caption' => 'Логин',
-                                 'type'    => 'varchar',
-                                 'refKey'  => false
-                                 ),
-                           array(
-                                 'name'    => 'password',
-                                 'caption' => 'Хэш пароля',
-                                 'type'    => 'char',
-                                 'refKey'  => false
-                                 ),
-                           array(
-                                 'name'    => 'verification',
-                                 'caption' => 'Подтверждение регистрации',
-                                 'type'    => 'varchar',
-                                 'refKey'  => false
-                                 ),
-                           array(
-                                 'name'    => 'salt',
-                                 'caption' => 'Соль (для хэша)',
-                                 'type'    => 'varchar',
-                                 'refKey'  => false
-                                 ),
-                           array(
-                                 'name'    => 'register_date',
-                                 'caption' => 'Дата регистрации',
-                                 'type'    => 'timestamp',
-                                 'refKey'  => false
-                                 ),
-                            );
+            array(
+                  'name'    => 'id',
+                  'caption' => '№',
+                  'type'    => 'int',
+                  'refKey'  => false
+                  ),
+            array(
+                  'name'    => 'name',
+                  'caption' => 'Имя',
+                  'type'    => 'Varchar',
+                  'refKey'  => false
+                  ),
+            array(
+                  'name'    => 'email',
+                  'caption' => 'Email',
+                  'type'    => 'varchar',
+                  'refKey'  => false
+                  ),
+            array(
+                  'name'    => 'login',
+                  'caption' => 'Логин',
+                  'type'    => 'varchar',
+                  'refKey'  => false
+                  ),
+            array(
+                  'name'    => 'password',
+                  'caption' => 'Хэш пароля',
+                  'type'    => 'char',
+                  'refKey'  => false
+                  ),
+            array(
+                  'name'    => 'verification',
+                  'caption' => 'Подтверждение регистрации',
+                  'type'    => 'varchar',
+                  'refKey'  => false
+                  ),
+            array(
+                  'name'    => 'salt',
+                  'caption' => 'Соль (для хэша)',
+                  'type'    => 'varchar',
+                  'refKey'  => false
+                  ),
+            array(
+                  'name'    => 'register_date',
+                  'caption' => 'Дата регистрации',
+                  'type'    => 'timestamp',
+                  'refKey'  => false
+                  ),
+             );
 
       function __construct()
       {
@@ -330,28 +341,34 @@
       public
          $fieldsHash = array(),
          $fieldsArr  = array(
-                           array(
-                                 'name'    => 'id',
-                                 'caption' => '№ заказа',
-                                 'type'    => 'int',
-                                 'refKey'  => false
-                                 ),
-                           array(
-                                 'name'     => 'user_id',
-                                 'caption'  => 'Имя пользователя',
-                                 'type'     => 'varchar',
-                                 'refKey'   => true,
-                                 'refTbl'   => 'user',
-                                 'refField' => 'id',
-                                 'refName'  => 'name'
-                                 ),
-                           array(
-                                 'name'    => 'order_date',
-                                 'caption' => 'Дата заказа',
-                                 'type'    => 'timestamp',
-                                 'refKey'  => false
-                                 ),
-                            );
+            array(
+                  'name'    => 'id',
+                  'caption' => '№',
+                  'type'    => 'int',
+                  'refKey'  => false
+                  ),
+            array(
+                  'name'    => 'order_id',
+                  'caption' => '№ заказа',
+                  'type'    => 'int',
+                  'refKey'  => false
+                  ),
+            array(
+                  'name'     => 'user_id',
+                  'caption'  => 'Имя пользователя',
+                  'type'     => 'varchar',
+                  'refKey'   => true,
+                  'refTbl'   => 'user',
+                  'refField' => 'id',
+                  'refName'  => 'name'
+                  ),
+            array(
+                  'name'    => 'order_date',
+                  'caption' => 'Дата заказа',
+                  'type'    => 'timestamp',
+                  'refKey'  => false
+                  ),
+             );
 
       function __construct()
       {
@@ -377,31 +394,31 @@
       public
          $fieldsHash = array(),
          $fieldsArr  = array(
-                           array(
-                                 'name'    => 'id',
-                                 'caption' => '№',
-                                 'type'    => 'int',
-                                 'refKey'  => false
-                                 ),
-                           array(
-                                 'name'     => 'order_id',
-                                 'caption'  => '№ заказа',
-                                 'type'     => 'int',
-                                 'refKey'   => true,
-                                 'refTbl'   => 'orders',
-                                 'refField' => 'id',
-                                 'refName'  => 'id'
-                                 ),
-                           array(
-                                 'name'     => 'good_id',
-                                 'caption'  => 'Заказанные товары',
-                                 'type'     => 'int',
-                                 'refKey'   => true,
-                                 'refTbl'   => 'goods',
-                                 'refField' => 'id',
-                                 'refName'  => 'name'
-                                 ),
-                            );
+            array(
+                  'name'    => 'id',
+                  'caption' => '№',
+                  'type'    => 'int',
+                  'refKey'  => false
+                  ),
+            array(
+                  'name'     => 'order_id',
+                  'caption'  => '№ заказа',
+                  'type'     => 'int',
+                  'refKey'   => true,
+                  'refTbl'   => 'orders',
+                  'refField' => 'id',
+                  'refName'  => 'order_id'
+                  ),
+            array(
+                  'name'     => 'good_id',
+                  'caption'  => 'Заказанные товары',
+                  'type'     => 'int',
+                  'refKey'   => true,
+                  'refTbl'   => 'goods',
+                  'refField' => 'id',
+                  'refName'  => 'name'
+                  ),
+             );
 
       function __construct()
       {

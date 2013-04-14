@@ -13,7 +13,6 @@
 			break;
 		case 'change':
 			$result['result'] = $obj->edit($columns, $values, $_POST['id']);
-			// echo $result['result'];
 			// if ($st->errorInfo()[0] == '23000') {
 				// $result['message'] = 'В базе данных уже существует товар с таким артикулом!';
 				// break;

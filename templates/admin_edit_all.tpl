@@ -1,5 +1,8 @@
 {extends file='page.2column.tpl'}
 {block name='title'}Админка - Редактирование{/block}
+{block name='links' append}
+	{include file='js_edit.tpl'}
+{/block}
 {block name='left_column'}
 	{include file='admin_menu.tpl'}
 	{include file='left_menu.tpl'}
@@ -43,4 +46,5 @@
    <input type="radio" id="in_add" name="sumbit_type" value="add" checked><label for="in_add">Добавление</label>
    <input type="radio" id="in_change" name="sumbit_type" value="change" disabled>
    <label for="in_change">Редактирование</label>
+ </div>
 {/block}

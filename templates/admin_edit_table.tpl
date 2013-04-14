@@ -2,38 +2,41 @@
 <table id="admin-table">
   <tbody>
     <tr>
-      {foreach from=$tblTitles item=title}
-        <th>{$title}</th>
-      {/foreach}
+      {for $i=1 to $tblTitles|@count - 1}
+        <th>{$tblTitles[$i]}</th>
+      {/for}
       <td></td>
     </tr>
-    {foreach from=$tableRows item=row name=tr}
-      <tr id="row_{$row[0]}">
+    {for $i=0 to $tableRows|@count - 1}
+      <tr id="row_{$tableRows[$i][0]}">
         {assign var='idx' value=0}
+        {assign var='row' value=$tableRows[$i]}
         {section name=cell loop=$row}
           {assign var='j' value=$smarty.section.cell.index}
-          {if $j+$idx < $row|@count}
-            {if $refFields[$j+$idx]}
-              <td abbr={$row[$j+$idx]}>{$row[$j+$idx+1]}</td>
-              {assign var='idx' value=$idx+1}
-            {else}
-              <td>{$row[$j+$idx]}</td>
+          {if $j > 0}
+            {if $j+$idx < $row|@count}
+              {if $refFields[$j+$idx]}
+                <td abbr={$row[$j+$idx]}>{$row[$j+$idx+1]}</td>
+                {assign var='idx' value=$idx+1}
+              {else}
+                <td>{$row[$j+$idx]}</td>
+              {/if}
             {/if}
           {/if}
         {/section}
-        <td class="last"><input type="checkbox" name="del_product[]" value={$row[0]}></td>
+        <td class="last"><input type="checkbox" name="del_product[]" value={$tableRows[$i][0]}></td>
       </tr>
-    {/foreach}
+      {/for}
     <tr>
-      {section name=cell loop=$tblTitles|@count}
+      {for $i=1 to $tblTitles|@count - 1}
         <td>
-        {if $smarty.section.cell.index + 1 == $tblTitles|@count}
-          {if $tableRows|@count}
+        {if $i + 1 == $tblTitles|@count}
+          {if $tableRows|@count - 1}
             <button type="submit" name="submit" value="delete">Удалить</button>
           {/if}
         {/if}
         </td>
-      {/section}
+      {/for}
       <td class="last"></td>
     </tr>
   </tbody>
