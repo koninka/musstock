@@ -1,6 +1,6 @@
 <?php
-	require_once('settings.php');
-	require_once('entity.php');
+	require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/settings.php');
+	require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/entity.php');
 
 	$result = Array('result' => false, 'table' => '', 'message' => 'Ошибка при выполнении запроса!');
 

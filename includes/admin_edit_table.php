@@ -1,6 +1,6 @@
 <?php
-   require_once('settings.php');
-   require_once('db_connect.php');
+   require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/settings.php');
+   require_once($_SERVER['DOCUMENT_ROOT'] . '/includes/db_connect.php');
 
    if (!isset($smarty)) {
       $smarty = new Smarty_Musshop();
