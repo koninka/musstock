@@ -9,13 +9,9 @@
    $req = explode('/', substr($_SERVER['REQUEST_URI'], 1));
    switch ($req[0]) {
       case '': case null: case false:
-         $smarty->assign('title', 'Musstok - good shop!');
-         $smarty->assign('name', 'Katty');
-         $smarty->assign('caption', 'Добро пожаловать в магазин, котятки');
-         $smarty->assign('container', Array('main.tpl'));
+         $smarty->display('index.tpl');
          break;
       case 'admin':
-         $smarty->assign('sb_components', Array('admin_menu.tpl', 'left_menu.tpl'));
          switch ($req[1]) {
             case 'goods': case 'products':
                $myGoods->makeEditTable(true);
@@ -33,10 +29,9 @@
                $myUser->makeEditTable(true);
                break;
          }
-         $smarty->assign('container', array('admin_products_middle.tpl'));
+         $smarty->display('admin_edit_all.tpl');
          break;
       default:
          $smarty->assign('caption', 'Ошибка 404');
    }
-   $smarty->display('page.tpl');
 ?>

@@ -1,3 +1,11 @@
+{extends file='page.2column.tpl'}
+{block name='title'}Админка - Редактирование{/block}
+{block name='left_column'}
+	{include file='admin_menu.tpl'}
+	{include file='left_menu.tpl'}
+{/block}
+{block name='page_title'}Добро пожаловать на страничку редактирования, котятки!{/block}
+{block name='center_column'}
 <div id="edit">
 	<h2>Список товаров</h2>
 	<div>
@@ -35,3 +43,4 @@
    <input type="radio" id="in_add" name="sumbit_type" value="add" checked><label for="in_add">Добавление</label>
    <input type="radio" id="in_change" name="sumbit_type" value="change" disabled>
    <label for="in_change">Редактирование</label>
+{/block}
