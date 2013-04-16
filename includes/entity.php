@@ -11,7 +11,6 @@
    $myUser = new User();
    $myOrders = new Orders();
    $myOrderGoods = new Order_Goods();
-   // print_r($myUser->fieldsHash);
    class Entity
    {
       public
@@ -21,12 +20,21 @@
          $fieldsHash = array(),
          $fieldsArr  = array();
 
-      // abstract public function findById();
-
       function __construct()
       {
-         foreach ($this->fieldsArr as $value) {
-            $this->fieldsHash[$value['name']] = $value;
+         foreach ($this->fieldsArr as &$value) {
+            $this->fieldsHash[$value['name']] = &$value;
+            if ($value['refKey']) {
+               $value['getRefData'] = function() use($value) {
+                  $c = new $value['refTbl']();
+                  $data = $c->select(array('id', $value['refField'], $value['refName']), false, PDO::FETCH_ASSOC);
+                  $result = array();
+                  foreach ($data as $k => $v) {
+                     $result[$v[$value['refField']]] = $v[$value['refName']];
+                  }
+                  return $result;
+               };
+            }
          }
       }
 
@@ -108,53 +116,35 @@
          $selectArr  = array();
          $titlesArr  = array();
          $refFields  = array();
-         $caregories = array();
+         $categories = array();
          foreach ($this->fieldsArr as $value) {
             array_push($selectArr, $value['name']);
             array_push($refFields, intval($value['refKey']));
             if ($value['refKey']) {
+               $categories[$value['name']] = $value['getRefData']();
                array_push($refFields, 0);
-               $c = new $value['refTbl']();
-               $data = $c->select(array('id', $value['refField'], $value['refName']), false, PDO::FETCH_ASSOC);
-               // print_r($data);
-               // echo "<br><br>";
-               $categories[$value['name']] = array();
-               foreach ($data as $k => $v) {
-                  $categories[$value['name']][$v[$value['refField']]] = $v[$value['refName']];
-               }
             }
-            // array_push($titlesArr, $value['name']);
             array_push($titlesArr, $value['caption']);
          }
-         // echo 'selects<br>';
-         // print_r($selectArr);
-         // echo "<br><br>";
-         // echo 'refs<br>';
-         // print_r($refFields);
-         // echo "<br><br>";
-         // echo 'cats<br>';
-         // print_r($categories);
-         // echo "<br><br>";
          $data = $this->select($selectArr, true);
-         $smarty->assign('tableRows', $data);
-         $smarty->assign('tblTitles', $titlesArr);
-         $smarty->assign('refFields', $refFields);
-         $smarty->assign('table', $this->tblName);
+         $varArr = array('tableRows' => $data,
+                         'tblTitles' => $titlesArr,
+                         'refFields' => $refFields,
+                         'table' => $this->tblName);
+         $smarty->assign('varArr', $varArr);
          $editTable = $smarty->fetch('admin_edit_table.tpl');
          if ($isShowTable) {
-            $smarty->assign('categories', isset($categories) ? $categories : '');
-            $smarty->assign('editTable', $editTable);
+            $varArr['categories'] = isset($categories) ? $categories : '';
+            $varArr['editTable'] = $editTable;
             array_shift($selectArr);
-            $smarty->assign('selectArr', $selectArr);
-            $smarty->assign('links', array('js_edit.tpl'));
-            $smarty->assign('container', array(0 => 'admin_products_middle.tpl'));
+            $varArr['selectArr'] = $selectArr;
+            $smarty->assign('varArr', $varArr);
          } else {
             return $editTable;
          }
       }
 
    }
-
 
    class Goods extends Entity
    {
@@ -423,6 +413,47 @@
       function __construct()
       {
          $this->tblName = 'order_goods';
+         parent::__construct();
+      }
+
+      public function makeEditTable($isShowTable = false)
+      {
+         global $smarty;
+         if ($isShowTable) {
+            parent::makeEditTable($isShowTable);
+            $smarty->assign('caption', 'Добро пожаловать на страничку заказов, котятки');
+         } else {
+            return parent::makeEditTable();
+         }
+      }
+
+   }
+
+   class Subcategory extends Entity
+   {
+      public
+         $fieldsHash = array(),
+         $fieldsArr  = array(
+            array(
+                  'name'     => 'id',
+                  'caption'  => 'Категория',
+                  'type'     => 'int',
+                  'refKey'   => true,
+                  'refTbl'   => 'category',
+                  'refField' => 'id',
+                  'refName'  => 'name'
+                  ),
+            array(
+                  'name'     => 'parent_id',
+                  'caption'  => 'Родительская категория',
+                  'type'     => 'int',
+                  'refKey'   => false
+                  ),
+             );
+
+      function __construct()
+      {
+         $this->tblName = 'Subcategory';
          parent::__construct();
       }
 
