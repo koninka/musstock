@@ -1,227 +1,237 @@
 * {
-	margin: 0;
-	padding: 0;
+   margin: 0;
+   padding: 0;
 }
 html, body {
-	height: 100%;
+   height: 100%;
 }
 body, input, button {
-	font-family: Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
-	font-size: 9.5pt;
+   font-family: Arial, "Helvetica CY", "Nimbus Sans L", sans-serif;
+   font-size: 9.5pt;
 }
 body {
-	background-image: url('/img/bg3.jpg');
+   background-image: url('/img/bg3.jpg');
 }
 ol, ul, menu {
-	list-style: none;
+   list-style: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+   border-collapse: collapse;
+   border-spacing: 0;
 }
 p {
-	margin-bottom: 10px;
+   margin-bottom: 10px;
 }
 #wrapper {
-	min-height: 100%;
-	background-color: #fff;
-	width: 1200px;
-	margin: 0 auto;
+   min-height: 100%;
+   background-color: #fff;
+   width: 1200px;
+   margin: 0 auto;
 }
 #wrapper_in {
-	width: 1140px;
-	margin: 0 auto;
+   width: 1140px;
+   margin: 0 auto;
 }
 #left_sb {
-	display: inline-block;
-	width: 220px;
+   display: inline-block;
+   width: 220px;
 }
 #container {
-	vertical-align: top;
-	display: inline-block;
-	padding: 0 0px 0 10px;
+   vertical-align: top;
+   display: inline-block;
+   padding: 0 0px 0 10px;
 }
 #admin-table {
-	width: 100%;
+   width: 100%;
 }
 #admin-table td, th {
-	padding: 0;
-	padding-left: 5px;
-	border: 1px black solid;
+   padding: 0;
+   padding-left: 5px;
+   border: 1px black solid;
 }
-#admin-table th	{
-	text-align: center;
-	background: #eee;
-	padding: 7px;
+#admin-table th   {
+   text-align: center;
+   background: #eee;
+   padding: 7px;
 }
 #admin-table td {
-	height: 20px;
-	text-align: left;
+   height: 20px;
+   text-align: left;
 }
 #admin-table tr td:last-child, #admin-table tr th:last-child {
-	width: 3% !important;
-	visibility: hidden;
-	border: 0;
+   width: 3% !important;
+   visibility: hidden;
+   border: 0;
 }
 #admin-table tr:last-child {
-	visibility: hidden;
+   visibility: hidden;
 }
  #admin-table tr:last-child td {
-	border: 0;
+   border: 0;
 }
 #admin-table tr:hover:not(.last) {
-	cursor: pointer;
-	background: #eee;
+   cursor: pointer;
+   background: #eee;
 }
 form.edit-form input[type=button], form.edit-form input[type=submit]{
-	font-size: 12px;
-	width: 100%;
+   font-size: 12px;
+   width: 100%;
 }
 form.edit-form select {
-	font-size: 12px;
+   font-size: 12px;
 }
 /*div#edit div {
-	text-align: right;
-	width: 100%;
+   text-align: right;
+   width: 100%;
 }*/
 form.edit-form {
-	margin: 5px;
-	text-align: left;
+   margin: 5px;
+   text-align: left;
 }
 form.edit-form fieldset {
-	padding: 5px;
+   padding: 5px;
 }
 form.edit-form label, form.edit-form input {
-	display: block;
+   display: block;
 }
 form.edit-form button {
-	width: 100px;
-	display: inline-block;
+   width: 100px;
+   display: inline-block;
 }
 form.edit-form legend {
-	font-style: italic;
+   font-style: italic;
 }
 form.edit-form input {
-	margin: 3px 0;
+   margin: 3px 0;
 }
 form.add h1 {
-	font-size: 13px;
-	letter-spacing: -1px;
-	margin-bottom: 3px;
+   font-size: 13px;
+   letter-spacing: -1px;
+   margin-bottom: 3px;
 }
 /*#admin-table tr td:nth-child(2), #admin-table tr th:nth-child(2),
 #admin-table tr td:last-child, #admin-table tr th:last-child {
-	width: 6% !important;
+   width: 6% !important;
 }*/
 #edit label {
-	display: block;
-	float: right;
-	margin-right: 25px;
+   display: block;
+   float: right;
+   margin-right: 25px;
 }
 #edit form {
-	clear: both;
+   clear: both;
 }
 /*-------------------------------------------------------*/
 nav .bigmenu {
-	font-size: 1.5em;
-	margin:0;
-	line-height: 1.25em;
-	float: left;
-	width: 87%;
-	padding-bottom: 14px;
+   font-size: 1.5em;
+   margin:0;
+   line-height: 1.25em;
+   float: left;
+   width: 87%;
+   padding-bottom: 14px;
 }
 nav .bigmenu li {
-	float: left;
-	margin-right: 6%;
+   float: left;
+   margin-right: 6%;
 }
 nav .bigmenu a {
-	color: #000;
+   color: #000;
 }
 nav .bigmenu a.active, nav .bigmenu a.active:hover, nav .bigmenu a:hover {
-	color: #900;
+   color: #900;
 }
 nav .smallmenu {
-	clear: left;
-	margin:0; float: left;
-	width: 87%;
-	line-height: 1.2em;
-	font-size: 1.05em;
+   clear: left;
+   margin:0; float: left;
+   width: 87%;
+   line-height: 1.2em;
+   font-size: 1.05em;
 }
 nav .smallmenu li {
-	float: left;
-	padding: 0 17px 4px 0;
+   float: left;
+   padding: 0 17px 4px 0;
 }
 nav .smallmenu a {
-	color:#999;
+   color:#999;
 }
 nav .smallmenu a.active, nav .smallmenu a.active:hover, nav .smallmenu a:hover {
-	color:#000;
+   color:#000;
 }
 #address {
-	font-size: 28px;
-	font-style: normal;
-	line-height: 1em;
-	display: block;
-	margin: -14px 0 0;
-	position: absolute;
-	right: 10px;
-	width: 310px;
+   font-size: 28px;
+   font-style: normal;
+   line-height: 1em;
+   display: block;
+   margin: -14px 0 0;
+   position: absolute;
+   right: 10px;
+   width: 310px;
 }
 #address span, #address li {
-	font-size: 14px;
-	font-weight: normal;
-	display: block;
-	color: #444;
-	line-height: 1.6em;
+   font-size: 14px;
+   font-weight: normal;
+   display: block;
+   color: #444;
+   line-height: 1.6em;
 }
 #address a {
-	text-decoration: underline;
+   text-decoration: underline;
 }
 #address span, #address ul {
-	margin-top: 12px;
+   margin-top: 12px;
 }
 header {
-	white-space: nowrap;
-	overflow-x: hidden;
+   white-space: nowrap;
+   overflow-x: hidden;
 }
 
 #leftlinks {
-	width: 230px;
-	font-size: 10pt;
-	display: inline-block;
-	vertical-align: top;
-	padding: 20px 0 25px 0;
+   width: 230px;
+   font-size: 10pt;
+   display: inline-block;
+   vertical-align: top;
+   padding: 20px 0 25px 0;
 }
 
 #leftlinks .cartBox {
-	background-color: #eeeeee;
-	padding: 9px 14px;
-	margin: 0 13px 0 0;
+   background-color: #eeeeee;
+   padding: 9px 14px;
+   margin: 0 13px 0 0;
 }
 
 #leftlinks .cartBox span {
-	margin: 0 0 0 10px;
-	color: #999999;
+   margin: 0 0 0 10px;
+   color: #999999;
 }
 
 #logo {
-	margin: 20px 0 0 0;
+   margin: 20px 0 0 0;
 }
 
 #logo img {
-	max-width: 200px;
+   max-width: 200px;
 }
 
 header nav {
-	width: 640px;
-	display: inline-block;
-	vertical-align: top;
-	padding: 20px 0 25px 0;
+   width: 640px;
+   display: inline-block;
+   vertical-align: top;
+   padding: 20px 0 25px 0;
 }
 
 header address {
-	width: 300px;
-	display: inline-block;
-	vertical-align: top;
-	padding: 20px 0 25px 20px;
+   width: 300px;
+   display: inline-block;
+   vertical-align: top;
+   padding: 20px 0 25px 20px;
+}
+div#edit > div {
+   margin-top: 10px;
+}
+#edit-box input[type='text'], #edit-box select {
+   width: 220px;
+}
+#edit ul{
+   font-family: "Helvetica CY", "Nimbus Sans L";
+   font-size: 10.2pt;
 }

@@ -29,7 +29,7 @@ CREATE TABLE goods (
       amount      INT NOT NULL,
       PRIMARY KEY(id),
       UNIQUE KEY(marking),
-      FOREIGN KEY(category_id) REFERENCES category(id)
+      FOREIGN KEY(category_id) REFERENCES category(id) ON DELETE CASCADE
 );
 
 CREATE TABLE orders (
@@ -39,18 +39,23 @@ CREATE TABLE orders (
       order_date  TIMESTAMP,
       PRIMARY KEY(id),
       UNIQUE KEY(order_id),
-      FOREIGN KEY(user_id) REFERENCES user(id)
+      FOREIGN KEY(user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
-
+CREATE TABLE subcategory (
+      id        INT NOT NULL,
+      parent_id INT NOT NULL,
+      FOREIGN KEY(id)        REFERENCES category(id) ON DELETE CASCADE,
+      FOREIGN KEY(parent_id) REFERENCES category(id) ON DELETE CASCADE
+);
 
 CREATE TABLE order_goods (
       id       INT NOT NULL AUTO_INCREMENT,
       order_id INT NOT NULL,
       good_id  INT NOT NULL,
       PRIMARY KEY(id),
-      FOREIGN KEY(order_id) REFERENCES orders(id),
-      FOREIGN KEY(good_id) REFERENCES goods(id)
+      FOREIGN KEY(order_id) REFERENCES orders(id) ON DELETE CASCADE,
+      FOREIGN KEY(good_id)  REFERENCES goods(id)  ON DELETE CASCADE
 );
 
 INSERT INTO user(name, email, login, password, verification, salt) VALUES
@@ -65,7 +70,27 @@ INSERT INTO category(name) VALUES
    ('Ударные'),
    ('Микрофоны'),
    ('DJ'),
-   ('Свет');
+   ('Свет'),
+   ('Ударные установки'),
+   ('Акустические ударные установки'),
+   ('Электронные ударные установки'),
+   ('Sonor'),
+   ('YAMAHA'),
+   ('TAMA');
+
+INSERT INTO subcategory(id, parent_id) VALUES
+   (1, 1),
+   (2, 2),
+   (3, 3),
+   (4, 4),
+   (5, 5),
+   (6, 6),
+   (7, 7),
+   (8, 7),
+   (9, 7),
+   (10, 8),
+   (11, 8),
+   (12, 8);
 
 INSERT INTO goods(marking, name, category_id, amount) VALUES
    ('ab08433', 'IBANEZ GRX40 BLACK NIGHT', 1, 4),

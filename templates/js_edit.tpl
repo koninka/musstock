@@ -14,6 +14,7 @@
       return false;
     });
 
+  {block name='data_click'}
     jQuery(document).on('click', '#admin-table tr td:not(.last)', function() {
       var jQuerytd = jQuery('#admin-table tr td:last-child');
       var tr = jQuery(this).parent().get(0);
@@ -30,9 +31,9 @@
       var tr_id = $(this).parent().attr('id');
       var id = (tr_id.substring(tr_id.indexOf('_') + 1));
       jQueryinput.val(id);
-      {foreach from=$selectArr item=item name=field}
+      {foreach from=$varArr.selectArr item=item name=field}
         {assign var='idx' value=$smarty.foreach.field.index}
-        {if isset($categories[$item])}
+        {if isset($varArr.categories[$item])}
           jQueryeditBox.find("select#{$item} option[value='"+tr.cells[{$idx}].abbr+"']")
                        .prop("selected", "selected");
         {else}
@@ -42,21 +43,26 @@
       jQueryeditBox.find('button').prop('value', 'change');
       jQueryeditBox.find('button').text('Редактировать');
     });
+  {/block}
 
     jQuery('#edit-box #in_add').change(function() {
       var jQueryeditBox = jQuery('#edit-box');
       jQueryeditBox.find('form legend').text('Добавление');
       jQueryeditBox.find('#in_id').css('display', 'none');
-      jQueryeditBox.find('button').prop('value', 'add').text('Добавить');
+      jQuery('#edit-box').find('button[value="delete"]').css('display', 'none');
+      jQueryeditBox.find('button[value="change"]').prop('value', 'add').text('Добавить');
+      $('#edit-box select#category_id option').prop('disabled', false);
     });
 
     jQuery('#edit-box #in_change').change(function() {
       var jQueryeditBox = jQuery('#edit-box');
       jQueryeditBox.find('form legend').text('Редактирование');
       jQueryeditBox.find('#in_id').css('display', 'block');
-      jQueryeditBox.find('button').prop('value', 'change').text('Редактировать');
+      jQuery('#edit-box').find('button[value="delete"]').css('display', 'inline-block');
+      jQueryeditBox.find('button[value="add"]').prop('value', 'change').text('Редактировать');
     });
 
+  {block name='submit_data'}
     jQuery(document).on('submit', 'form.edit-form', function() {
       var c = jQuery('#edit form input:checked');
       var del = []
@@ -66,9 +72,9 @@
       jThis = jQuery(this);
       var acolumns = [];
       var avalues  = {};
-      {foreach from=$selectArr item=item name=field}
+      {foreach from=$varArr.selectArr item=item name=field}
         acolumns.push('{$item}');
-        {if isset($categories[$item])}
+        {if isset($varArr.categories[$item])}
           avalues['{$item}'] = jThis.find('select#{$item} option:selected').val();
         {else}
           avalues['{$item}'] = jThis.find('input[name="{$item}"]').val();
@@ -81,7 +87,7 @@
             {
               type:         atype,
               id:           aid,
-              table:        '{$table}',
+              table:        '{$varArr.table}',
               columns:      acolumns,
               values:       avalues,
               del_products: del
@@ -100,5 +106,6 @@
           );
       return false;
     });
+  {/block}
   });
 </script>

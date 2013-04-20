@@ -10,13 +10,13 @@
 {block name='page_title'}Добро пожаловать на страничку редактирования, котятки!{/block}
 {block name='center_column'}
 <div id="edit">
-	<h2>Список товаров</h2>
+	<h2>{$caption}</h2>
 	<div>
 		<label for="check_box">Редактировать
 			<input type="checkbox" value="1000" id="check_box"/>
 		</label>
 		<div id="tbl">
-			{$editTable}
+			{$varArr.editTable}
 		</div>
 	</div>
 </div>
@@ -28,13 +28,12 @@
 			<label for="id">№:</label>
 				<input type="text" name="id" id="id" disabled>
 		</div>
-
-		{foreach from=$selectArr item=item name=field}
-			<label for="{$item}">{$tblTitles[$smarty.foreach.field.iteration]}</label>
-			{if isset($categories[$item])}
+		{foreach from=$varArr.selectArr item=item name=field}
+			<label for="{$item}">{$varArr.tblTitles[$smarty.foreach.field.iteration]}</label>
+			{if isset($varArr.categories[$item])}
 				<select name="{$item}" id="{$item}" style="display: block; margin-bottom: 3px">
 					<option disabled>Выберите категорию</option>
-					{html_options options=$categories[$item]}
+					{html_options options=$varArr.categories[$item]}
 				</select>
 			{else}
 				<input type="text" name="{$item}" id="{$item}">
